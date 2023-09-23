@@ -1,6 +1,18 @@
 const URL = 'http://localhost:3400/clientes';
-let tabelaCliente = document.querySelector('table>tbody');
 
+let modoEdicao = false;
+
+let btnAdicionar = document.getElementById('btn-adicionar');
+let tabelaCliente = document.querySelector('table>tbody');
+let modalCliente = new bootstrap.Modal(document.getElementById('modal-cliente'), {});
+let tituloModal = document.querySelector('h4.modal-title');
+
+
+btnAdicionar.addEventListener('click', () =>{
+    modoEdicao = false;
+    tituloModal.textContent = "Adicionar cliente";
+    modalCliente.show();
+});
 
 function obterClientes() {
     fetch(URL, {
@@ -14,7 +26,10 @@ function obterClientes() {
 }
 
 function editarCliente(id) {
-    alert('Editar cliente: ' + id);
+    modoEdicao = true;
+    tituloModal.textContent = "Editar cliente";
+    modalCliente.show();
+    //alert('Editar cliente: ' + id);
 }
 
 function excluirCliente(id) {
