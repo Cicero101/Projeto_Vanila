@@ -14,7 +14,11 @@ btnEntrar.addEventListener('click', () =>{
     //3° Validar o email e senha
     if(!userEmail || !userSenha){
     //4° Caso vazios mandar mensagem de erro
-        alert("Os campos de email e senha são obrigatórios!");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Os campos de email e senha são obrigatórios!'
+        });
         return;
     }
     //Verificar o email e senha
@@ -40,18 +44,22 @@ function autenticar(email, senha){
             alert(response.mensagem);
             return;
         }else{
-            alert("Usuário autenticado com sucesso!");
             salvalToken(response.token);
             salvalUsuario(response.usuario);
-            window.open("cliente.html", "_self");
+
+            mostrarLoading();
+            setTimeout(() => {
+                window.open("cliente.html", "_self");
+            },5000)
         }
     })
 };
 
-function salvalToken(token){
-    localStorage.setItem('token',token);
+function mostrarLoading(){
+    const divLoading = document.querySelector("div.loading");
+    divLoading.style.display = "block";
+
+    const divBoxLogin = document.querySelector("div.caixa-login")
+    divBoxLogin.style.display = "none";
 }
 
-function salvalUsuario(usuario){
-    localStorage.setItem('usuario', JSON.stringify(usuario));    
-}

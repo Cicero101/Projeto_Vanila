@@ -29,5 +29,9 @@ button.btn {
 /* Override */
 
 div.modal-dialog{
-    max-width: 600px;
+    max-width: 800px;
+}
+
+.loading{
+    display: none;
 }
